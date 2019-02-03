@@ -45,8 +45,24 @@ type(
 * 整型：int/uint
 
   - 根据平台可能是32或64位
-
 * 8位整型:int8/uint8
+
   - 长度: 1字节
   - 取值: -128&sim;127 / 0&sim;255
 * 字节型:byte(uint8别名)
+* 16位整型：int16/uint16
+
+  - 长度：2字节
+  - 取值：-32768&sim;32767/0&sim;65535
+* 其它值类型
+
+  - array 、struct、string
+* 引用类型
+  - slice、map、chan
+
+* 函数类型
+
+  - func
+* 接口类型
+
+  - inteface   
