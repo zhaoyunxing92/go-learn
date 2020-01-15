@@ -6,6 +6,9 @@
 
 * [x] [day02](./day02/readme.md) if、for、switch、operators(运算)
 
+* [x] [day03](./day03/readme.md) array
+
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
