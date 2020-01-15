@@ -3,6 +3,7 @@
 ## 学习进度
 
 * [x] [day01](./day01/readme.md) 变量、常量、字符串、char
+* [x] [day02](./day02/readme.md) if、for
 
 ## go 一般结构
 
