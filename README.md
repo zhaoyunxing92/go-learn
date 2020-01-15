@@ -2,7 +2,7 @@
 
 ## 学习进度
 
-* [x] [day01](./day01/readme.md) 变量和常量
+* [x] [day01](./day01/readme.md) 变量、常量、字符串、char
 
 ## go 一般结构
 
