@@ -1,5 +1,9 @@
 # go-learn
 
+## 学习进度
+
+* [x] [day01](./day01/readme.md) 变量和常量
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
@@ -11,29 +15,9 @@
  * 接口声明`interface`
  * 未使用的包必须删除
 
- ## go 可见性规则
+## go 可见性规则
 
  * go 通过首字母大小写决定常量、变量、类型、结构、函数是否可以被外部访问，大写的可以被外部访问
-
- ## go 变量组声明方式
-
-  ```go
-// 常量组定义
-const(
-    name="sunny"
-    name2="sunny2"
-)
-//全局变量声明和赋值
-var(
-    name="sunny"
-    age=27
-)
-//一般类型声明
-type(
-    type1 string
-    type2 int
-)
-  ```
 
 ## go 基本类型
 
