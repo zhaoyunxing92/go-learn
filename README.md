@@ -8,6 +8,8 @@
 
 * [x] [day03](./day03/readme.md) array
 
+* [x] [day04](./day04/readme.md) slice（切片）是建立在数组之上的更方便，更灵活，更强大的数据结构
+
 
 ## go 一般结构
 
