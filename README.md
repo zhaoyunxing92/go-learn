@@ -1,4 +1,4 @@
-# goLearn
+# go-learn
 
 ## go 一般结构
 
