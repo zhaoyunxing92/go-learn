@@ -109,3 +109,77 @@ for b > 0 {
     b--
 }
 ```
+
+### 无限循环
+
+```go
+for {
+    fmt.Println("1")
+}
+```
+
+### break 跳出循环
+
+```go
+for i := 0; i < 10; i++ {
+    fmt.Println(i)
+    if i == 3 {
+        break
+    }
+}
+```
+
+### continue跳出本次循环
+
+```go
+for i := 0; i < 10; i++ {
+    if i == 3 {
+        continue
+    }
+    fmt.Println(i)
+}
+```
+
+## switch
+
+### 基础用法
+
+```go
+score := 70
+switch score {
+case 100:
+    fmt.Println("甲")
+case 70:
+    fmt.Println("乙")
+case 60:
+    fmt.Println("丙")
+default:
+    fmt.Println("丁")
+}
+```
+
+### case多个值
+
+```go
+a := 5
+switch a {
+case 1, 3, 5, 7, 9:
+    fmt.Println("奇数")
+case 2, 4, 6, 8:
+    fmt.Println("偶数")
+default:
+    fmt.Println("未定义")
+}
+```
+
+### case只用表达式
+
+```go
+age := 30
+switch {
+case age > 18:
+    fmt.Println("成年人")
+case age <= 18:
+    fmt.Println("未成年人")
+}
+```

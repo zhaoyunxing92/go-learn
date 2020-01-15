@@ -22,4 +22,24 @@ func main() {
 		fmt.Println(b)
 		b--
 	}
+	//4.无限循环
+	for {
+		fmt.Println("1")
+	}
+
+	// 5.break跳出循环
+	fmt.Println("=========")
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+		if i == 3 {
+			break
+		}
+	}
+	// 6.continue 继续下次循环
+	for i := 0; i < 10; i++ {
+		if i == 3 {
+			continue
+		}
+		fmt.Println(i)
+	}
 }
