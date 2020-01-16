@@ -10,6 +10,8 @@
 
 * [x] [day04](./day04/readme.md) slice（切片）是建立在数组之上的更方便，更灵活，更强大的数据结构
 
+* [x] [day05](./day05/readme.md) go中的map是一种无序的`key-value`数据结构，go的map是引用类型，必须初始化才能使用
+
 
 ## go 一般结构
 
