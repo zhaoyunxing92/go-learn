@@ -12,6 +12,8 @@
 
 * [x] [day05](./day05/readme.md) go中的map是一种无序的`key-value`数据结构，go的map是引用类型，必须初始化才能使用
 
+* [x] [day06](./day06/readme.md) func,defer(延迟函数的倒序执行)
+
 
 ## go 一般结构
 
