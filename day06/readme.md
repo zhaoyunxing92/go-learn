@@ -109,8 +109,8 @@ func main() {
 	// 第三个参数是函数
 	r1 := calc(100, 200, add)
 	r2 := calc(100, 200, sub)
-	fmt.Println(r1)
-	fmt.Println(r2)
+	fmt.Println(r1) //300
+	fmt.Println(r2) //-100
 }
 ```
 
@@ -142,13 +142,16 @@ func main() {
 	defer fmt.Println(2)
 	defer fmt.Println(3)
 	fmt.Println("end...")
-	//执行结果
-	//start...
-	//end...
-	//3
-	//2
-	//1
 }
+```
+执行结果
+
+```log
+start...
+end...
+3
+2
+1
 ```
 
 ### defer使用场景
