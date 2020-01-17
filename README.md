@@ -14,6 +14,7 @@
 
 * [x] [day06](./day06/readme.md) func,defer(延迟函数的倒序执行)
 
+* [x] [day07](./day07/readme.md) 匿名函数和闭包
 
 ## go 一般结构
 
