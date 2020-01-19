@@ -18,6 +18,8 @@
 
 * [x] [day08](./day08/readme.md) panic and recover 异常处理
 
+* [x] [day09](./day09/readme.md) pointer(指针)，函数传递都是值拷贝的可以用`&`表示获取地址,`*`根据地址取值
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
