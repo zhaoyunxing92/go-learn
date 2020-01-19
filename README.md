@@ -16,6 +16,8 @@
 
 * [x] [day07](./day07/readme.md) 匿名函数和闭包
 
+* [x] [day08](./day08/readme.md) panic and recover 异常处理
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
