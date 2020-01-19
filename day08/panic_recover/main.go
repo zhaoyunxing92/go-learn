@@ -7,7 +7,7 @@ func a() {
 }
 
 func b() {
-	defer func() {
+	defer func() { // defer 必须先定义，否定无法捕获panic异常
 		err := recover()
 		if err != nil {
 			fmt.Println(err)
