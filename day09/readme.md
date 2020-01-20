@@ -38,5 +38,4 @@ func modify1(x int) {
 func modify2(y *int) {
 	*y = 200
 }
-
 ```
