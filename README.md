@@ -22,7 +22,7 @@
 
 * [x] [day10](./day10/readme.md) struct(结构体),可以理解对java中的对象
 
-* [x] [day11](./day11/readme.md) struct(结构体),可以理解对java中的对象
+* [x] [day11](./day11/readme.md) 类型别名和自定义类型
 
 ## go 一般结构
 
