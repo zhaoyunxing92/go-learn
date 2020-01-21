@@ -22,6 +22,8 @@
 
 * [x] [day10](./day10/readme.md) struct(结构体),可以理解对java中的对象
 
+* [x] [day11](./day11/readme.md) struct(结构体),可以理解对java中的对象
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
