@@ -22,13 +22,13 @@ func getInputStudent() *student {
 	)
 	fmt.Println("请按照要求输入学员信息")
 
-	fmt.Println("请输入学号：")
+	fmt.Print("请输入学号：")
 	_, _ = fmt.Scanf("%d\n", &id)
 
-	fmt.Println("请输入姓名：")
+	fmt.Print("请输入姓名：")
 	_, _ = fmt.Scanf("%s\n", &name)
 
-	fmt.Println("请输入班级：")
+	fmt.Print("请输入班级：")
 	_, _ = fmt.Scanf("%s\n", &class)
 
 	return newStudent(id, name, class)
