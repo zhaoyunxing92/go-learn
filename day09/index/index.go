@@ -30,5 +30,4 @@ func modify2(y *int) {
 
 func name(a int) {
 	a = 30
-
 }
