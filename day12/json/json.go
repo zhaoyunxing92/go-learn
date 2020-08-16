@@ -1,10 +1,3 @@
-# go语言中的json
-
-go中字段可见性通过字段的`首字母大小`写实现,使用go的`tag`对json数据进行映射
-
-## 代码实战
-
-```go
 package main
 
 import (
@@ -71,12 +64,3 @@ func main() {
 	}
 	fmt.Printf("%#v\n", c2) //main.Class{Title:"304", Students:[]main.Student{main.Student{Id:15, Name:"sunny"}}}
 }
-
-```
-> 总结&注意点
-
-* 结构体转换为json数据的时候要注意首字母的大小写（可见性）
-
-* json字符串转结构体时可以忽略字符串key的大小写
-
-* 可以使用`tag`映射想要的`json key`
