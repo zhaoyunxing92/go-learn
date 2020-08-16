@@ -24,6 +24,8 @@
 
 * [x] [day11](./day11/readme.md) 类型别名和自定义类型
 
+* [x] [day12](./day12/readme.md) json数据处理
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
