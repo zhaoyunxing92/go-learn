@@ -50,7 +50,6 @@ func main() {
 		switch input {
 		case 1:
 			mgr.addStudent(getInputStudent())
-			break;
 		case 2:
 			mgr.updateStudent(getInputStudent())
 		case 3:
