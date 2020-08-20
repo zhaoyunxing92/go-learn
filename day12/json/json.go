@@ -13,10 +13,12 @@ type Student struct {
 	Id int `json:"id"`
 	//姓名
 	Name string `json:"name"`
+	//昵称
+	NickName string `json:"nickName"`
 }
 
-func newStudent(id int, name string) Student {
-	return Student{id, name}
+func newStudent(id int, name, nickName string) Student {
+	return Student{id, name, nickName}
 }
 
 /**
@@ -34,7 +36,7 @@ func main() {
 	c1 := Class{Title: "304", Students: make([]Student, 0, 5)}
 
 	for i := 0; i < 3; i++ {
-		sut := newStudent(i, fmt.Sprintf("stu%02d", i))
+		sut := newStudent(i, fmt.Sprintf("stu%02d", i), fmt.Sprintf("stu%02d", i))
 		c1.Students = append(c1.Students, sut)
 	}
 
@@ -52,7 +54,7 @@ func main() {
 	fmt.Println("=============json unmarshal=====================")
 
 	//可以发现json字符串首字母大小都可以转换成功,且字段全部大写或小写都可以成功转换
-	str:=`{"Title":"304","Students":[{"Id":15,"Name":"sunny"}]}`
+	str := `{"Title":"304","Students":[{"Id":15,"Name":"sunny","nick_name":"云兴"}]}`
 
 	var c2 Class
 

@@ -80,3 +80,14 @@ func main() {
 * json字符串转结构体时可以忽略字符串key的大小写
 
 * 可以使用`tag`映射想要的`json key`
+
+## JSON中int64转json数据丢失怎么处理
+
+```go
+type Student struct {
+	//编号
+	Id int64 `json:"id,string"` //这表示转json的时候int64转为string
+	//姓名
+	Name string `json:"name"`
+}
+```
