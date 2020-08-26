@@ -26,6 +26,8 @@
 
 * [x] [day12](./day12/readme.md) json数据处理
 
+* [x] [day13](./day13/readme.md) interface
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数
