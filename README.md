@@ -28,6 +28,8 @@
 
 * [x] [day13](./day13/readme.md) interface
 
+* [x] [day14](./day13/readme.md) reflect反射 ValueOf()获取值的信息、TypeOf()获取数据类型
+
 ## go 一般结构
 
  * 只有`package`名称为`main`的包可以包含`main`函数

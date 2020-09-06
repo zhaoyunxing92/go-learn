@@ -40,6 +40,7 @@ func main() {
 
 	reflectValue(a) //10,reflect.Value
 
+	//使用指针
 	reflectSetValue(&a)
 
 	fmt.Println(a) //50
