@@ -59,15 +59,15 @@ const (
 
 func main() {
 
-	fmt.Println(a, b, c) //10 10 10
+	fmt.Printf("a=%d, b=%d, c=%d \n", a, b, c) //a=10,b=10,c=10
 
-	fmt.Println(n1, n2, n3, n4) //0 1 2 3
+	fmt.Printf("n1=%d, n2=%d, n3=%d, n4=%d \n", n1, n2, n3, n4) //n1=0,n2=1,n3=2,n4=3
 
-	fmt.Println(a1, a2, a4) //0 1 3
+	fmt.Printf("a1=%d, a2=%d, a3=%d \n", a1, a2, a4) //a1=0, a2=1, a3=3
 
-	fmt.Println(b1, b2, b3, b4) //0 1 3
+	fmt.Printf("b1=%d, b2=%d, b3=%d, b4=%d \n", b1, b2, b3, b4) //b1=0, b2=100, b3=2, b4=3
 
-	fmt.Println(KB, MB, GB, TB) //1024 1048576 1073741824 1099511627776
+	fmt.Printf("KB=%d, MB=%d, GB=%d, TB=%d \n", KB, MB, GB, TB) //1024 1048576 1073741824 1099511627776
 
-	fmt.Println(e, f, g, h, w, q) //1 2 2 3 3 4
+	fmt.Printf("e=%d, f=%d, g=%d, h=%d, w=%d, q=%d \n", e, f, g, h, w, q) //1 2 2 3 3 4
 }

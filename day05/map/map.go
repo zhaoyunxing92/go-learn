@@ -41,10 +41,10 @@ func main() {
 	}
 
 	for key, val := range score {
-		fmt.Println(key,val)
+		fmt.Println(key, val)
 	}
 
 	// 删除指定key
-	delete(score,"sunny")
+	delete(score, "sunny")
 
 }

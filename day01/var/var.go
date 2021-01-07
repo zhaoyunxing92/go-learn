@@ -11,6 +11,10 @@ import "fmt"
 * 匿名变量（不占用命名空间，不会分配内存，可以重复使用，想忽略某个值的时候使用）语法：_
 */
 
+func foo() (int, string) {
+	return 10, "sunny"
+}
+
 func main() {
 	//标准声明
 	var name string
@@ -38,9 +42,4 @@ func main() {
 	_, y := foo() // 忽略第一个返回值
 
 	fmt.Println(x, y)
-
-}
-
-func foo() (int, string) {
-	return 10, "sunny"
 }

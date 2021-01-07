@@ -17,7 +17,6 @@ func main() {
 	ps.age = 28
 	fmt.Printf("%#v\n", ps) //&main.person{name:"sunny", city:"杭州", age:28}
 
-
 	// 取结构体地址实例化
 	p1 := &person{}
 	p1.age = 28

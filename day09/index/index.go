@@ -13,7 +13,7 @@ func main() {
 	name(a)
 	fmt.Println(a)
 
-	num:=50
+	num := 50
 	modify1(num)
 	fmt.Println(num)
 	modify2(&num)

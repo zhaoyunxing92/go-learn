@@ -12,8 +12,6 @@ func reflectType(x interface{}) {
 	fmt.Printf("type:%v,kind:%v\n", obj.Name(), obj.Kind())
 }
 
-
-
 type Cat struct{}
 
 type Dog struct{}

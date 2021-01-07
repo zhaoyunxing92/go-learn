@@ -15,7 +15,7 @@ func main() {
 		sliceMap["sunny"][0] = 100
 		sliceMap["sunny"][2] = 100
 	}
-    // 遍历
+	// 遍历
 	for k, v := range sliceMap {
 		fmt.Println(k, v)
 	}
