@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="sync_map" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="go-learn" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="PACKAGE" />
+    <filePath value="$PROJECT_DIR$/day15/sync_map/sync_map.go" />
+    <package value="github.com/zhaoyunxing/day15/sync_map" />
+    <directory value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
