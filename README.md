@@ -14,6 +14,21 @@
 
 * [x] [day06](./day06/readme.md) func,defer(延迟函数的倒序执行)
 
+* [x] [day07](./day07/readme.md) 匿名函数和闭包
+
+* [x] [day08](./day08/readme.md) panic and recover 异常处理
+
+* [x] [day09](./day09/readme.md) pointer(指针)，函数传递都是值拷贝的可以用`&`表示获取地址,`*`根据地址取值
+
+* [x] [day10](./day10/readme.md) struct(结构体),可以理解对java中的对象
+
+* [x] [day11](./day11/readme.md) 类型别名和自定义类型
+
+* [x] [day12](./day12/readme.md) json数据处理
+
+* [x] [day13](./day13/readme.md) interface
+
+* [x] [day14](./day13/readme.md) reflect反射 ValueOf()获取值的信息、TypeOf()获取数据类型
 
 ## go 一般结构
 

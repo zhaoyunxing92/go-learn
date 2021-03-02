@@ -48,7 +48,7 @@ func main() {
 	m := []int{1, 2, 3, 4, 5}
 	k := make([]int, 5, 5)
 	copy(k, m)
-	k[0]=100
+	k[0] = 100
 	fmt.Println(m) //[1 2 3 4 5]
 	fmt.Println(k) //[100 2 3 4 5]
 

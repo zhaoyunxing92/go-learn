@@ -5,17 +5,17 @@ import "fmt"
 //数组相关
 func main() {
 
-	var a [3] int
-	var b [4] int
+	var a [3]int
+	var b [4]int
 	fmt.Println(a) //[0 0 0]
 	fmt.Println(b) //[0 0 0 0]
 
 	// 1.数组初始化 数组长度必须是一个固定的值
-	var city = [4] string{"北京", "上海", "广州", "深圳"}
+	var city = [4]string{"北京", "上海", "广州", "深圳"}
 	fmt.Println(city) //[北京 上海 广州 深圳]
 
 	//2.编译器推导数组长度
-	var boolArray = [...] bool{true, false, true, false}
+	var boolArray = [...]bool{true, false, true, false}
 	fmt.Println(boolArray) //[true false true false]
 	// 3.使用索引值初始化
 	var langArray = [...]string{1: "golang", 8: "java", 5: "python"}
