@@ -1,0 +1,12 @@
+name: 浙江
+grades:
+  理科班:
+    id: 001
+    users:
+      - name: 张三
+        age: 15
+        height: 187
+      - name: 李四
+        height: 170
+  文科班:
+    id: 002
