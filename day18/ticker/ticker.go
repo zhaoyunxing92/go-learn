@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// 定时器
 func main() {
 	var ch chan int
 	ticker := time.NewTicker(time.Second * 5)
