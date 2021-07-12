@@ -24,8 +24,8 @@ func main() {
 	fmt.Println(ret)
 	//
 	x, y := calc(100)
-	ret1 := x(200) //base= 100+200 300
-	ret2 := y(100) //base= 300-100 200
+	ret1 := x(200) //root= 100+200 300
+	ret2 := y(100) //root= 300-100 200
 	fmt.Println(ret1, ret2)
 }
 
