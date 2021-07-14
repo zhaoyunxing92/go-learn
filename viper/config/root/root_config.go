@@ -14,7 +14,7 @@ import (
 // Config root config
 type Config struct {
 	// Application config
-	Application application.Config `yaml:"application" json:"application"`
+	Application application.Config `yaml:"application" json:"application" koanf:"application"`
 	// Registries config
 	Registries map[string]registry.Config `yaml:"registries" json:"registries"`
 	// Services config
