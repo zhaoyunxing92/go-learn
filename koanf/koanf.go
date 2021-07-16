@@ -14,8 +14,8 @@ import (
 
 func main() {
 	k := koanf.New(".")
-	getConfigPath("$HOME/conf/application.yaml")
-	if err := k.Load(file.Provider("../conf"), yaml.Parser()); err != nil {
+	//getConfigPath("$HOME/conf/application.yaml")
+	if err := k.Load(file.Provider(absolutePath("./koanf/conf/application.yaml")), yaml.Parser()); err != nil {
 		panic(err)
 	}
 
@@ -23,30 +23,13 @@ func main() {
 	if err := k.Unmarshal("dubbo", &conf); err != nil {
 		fmt.Println(err)
 	}
+	duration := k.Duration("dubbo.registries.nacos.timeout")
 	fmt.Println(conf)
+	fmt.Println(duration)
 }
 
-func getConfigPath(in string) {
-	//configPaths:=make([]string,)
-	if in != "" {
-		absin := absPathify(in)
-		fmt.Println(absin)
-		//if !stringInSlice(absin, v.configPaths) {
-		//	v.configPaths = append(v.configPaths, absin)
-		//}
-	}
-}
-
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
-	}
-	return false
-}
-
-func absPathify(inPath string) string {
+// absolutePath 获取绝对路径
+func absolutePath(inPath string) string {
 
 	if inPath == "$HOME" || strings.HasPrefix(inPath, "$HOME"+string(os.PathSeparator)) {
 		inPath = userHomeDir() + inPath[5:]
