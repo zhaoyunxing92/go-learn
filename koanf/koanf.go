@@ -23,10 +23,12 @@ func main() {
 	if err := k.Unmarshal("dubbo", &conf); err != nil {
 		fmt.Println(err)
 	}
+	duration := k.Duration("dubbo.registries.nacos.timeout")
 	fmt.Println(conf)
+	fmt.Println(duration)
 }
 
-//absolutePath path
+// absolutePath 获取绝对路径
 func absolutePath(inPath string) string {
 
 	if inPath == "$HOME" || strings.HasPrefix(inPath, "$HOME"+string(os.PathSeparator)) {

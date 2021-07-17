@@ -16,7 +16,7 @@ dubbo:
       group: dev
       address: 127.0.0.1:2181
   services:
-    hello-service:
+    helloService:
       interface: org.dubbo.service.HelloService
       registry: nacos,zk
     order-service:
