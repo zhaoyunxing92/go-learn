@@ -14,8 +14,8 @@ import (
 
 func main() {
 	k := koanf.New(".")
-	getConfigPath("$HOME/conf/application.yaml")
-	if err := k.Load(file.Provider("../conf"), yaml.Parser()); err != nil {
+
+	if err := k.Load(file.Provider(absolutePath("./koanf/conf/application.yaml")), yaml.Parser()); err != nil {
 		panic(err)
 	}
 
@@ -26,27 +26,8 @@ func main() {
 	fmt.Println(conf)
 }
 
-func getConfigPath(in string) {
-	//configPaths:=make([]string,)
-	if in != "" {
-		absin := absPathify(in)
-		fmt.Println(absin)
-		//if !stringInSlice(absin, v.configPaths) {
-		//	v.configPaths = append(v.configPaths, absin)
-		//}
-	}
-}
-
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
-	}
-	return false
-}
-
-func absPathify(inPath string) string {
+//absolutePath path
+func absolutePath(inPath string) string {
 
 	if inPath == "$HOME" || strings.HasPrefix(inPath, "$HOME"+string(os.PathSeparator)) {
 		inPath = userHomeDir() + inPath[5:]
