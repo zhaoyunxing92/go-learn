@@ -14,7 +14,7 @@ import (
 
 func main() {
 	k := koanf.New(".")
-	//getConfigPath("$HOME/conf/application.yaml")
+
 	if err := k.Load(file.Provider(absolutePath("./koanf/conf/application.yaml")), yaml.Parser()); err != nil {
 		panic(err)
 	}
