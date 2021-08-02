@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/zhaoyunxing/path/file"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -12,7 +13,7 @@ import (
 
 func main() {
 
-	path := "/Users/docker/code/github/go/go-learn/scan/service"
+	path := file.AbsolutePath("./scan/service")
 
 	fset := token.NewFileSet()
 	packages, _ := parser.ParseDir(fset, path, func(fi os.FileInfo) bool {

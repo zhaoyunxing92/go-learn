@@ -1,4 +1,4 @@
-package v1
+package service
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 func init() {
 	logrus.WithFields(logrus.Fields{
 		"name": "dj",
-		"age": 18,
+		"age":  18,
 	}).Info("info msg")
 	fmt.Println("init hello package")
 }
@@ -25,4 +25,3 @@ type HelloService struct {
 type OrderService struct {
 	GetOrder func(ctx context.Context, req []interface{}) error
 }
-
