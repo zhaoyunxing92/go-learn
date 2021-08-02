@@ -19,7 +19,7 @@ func Process(filename string, src []byte) ([]byte, error) {
 	)
 	fileSet := token.NewFileSet()
 
-	if file, err = parser.ParseFile(fileSet, filename, src, parser.AllErrors); err != nil {
+	if file, err = parser.ParseFile(fileSet, filename, src, parser.ParseComments); err != nil {
 		return nil, err
 	}
 
@@ -50,6 +50,7 @@ func groupImports(f *ast.File) {
 		spec.Path.ValuePos = gen.Pos()
 		gen.Specs = append(gen.Specs, spec)
 	}
+	//pos
 	//f.Decls = append(f.Decls, sys)
 	//var first *ast.GenDecl
 	//for _, decl := range f.Decls {
@@ -133,7 +134,7 @@ func mergeImports(fileSet *token.FileSet, f *ast.File) {
 		if !ok || gen.Tok != token.IMPORT || declImports(gen, "C") {
 			continue
 		}
-		fmt.Printf(" pos=%d, lparen=%d ,rparen=%d \n", gen.Pos(), gen.Lparen, gen.Rparen)
+		fmt.Printf("decl=%v, pos=%d, lparen=%d ,rparen=%d \n", gen, gen.Pos(), gen.Lparen, gen.Rparen)
 		if first == nil {
 			first = gen
 			continue // Don't touch the first one.
