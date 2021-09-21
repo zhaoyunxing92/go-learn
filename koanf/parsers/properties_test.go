@@ -1,31 +1,29 @@
-package main
+package parsers
 
 import (
 	"fmt"
 	"github.com/knadh/koanf"
-	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
-	"github.com/zhaoyunxing/viper/config/root"
+	"github.com/zhaoyunxing/koanf/domain"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
+	"testing"
 )
 
-func main() {
-	k := koanf.New(".")
+func TestName(t *testing.T) {
+	k := koanf.New("=")
 
-	if err := k.Load(file.Provider(absolutePath("./koanf/conf/application.yaml")), yaml.Parser()); err != nil {
+	if err := k.Load(file.Provider(absolutePath("../conf/application.properties")), Parser()); err != nil {
 		panic(err)
 	}
-
-	var conf root.Config
-	if err :=  k.UnmarshalWithConf("", &conf, koanf.UnmarshalConf{Tag: "yaml"}); err != nil {
+	var conf = domain.DubboConfig{}
+	if err := k.UnmarshalWithConf("dubbo", &conf, koanf.UnmarshalConf{Tag: "yaml"}); err != nil {
 		fmt.Println(err)
 	}
-	duration := k.Duration("dubbo.registries.nacos.timeout")
-	fmt.Println(conf)
-	fmt.Println(duration)
+
+	fmt.Println(conf.Application.Name)
 }
 
 // absolutePath 获取绝对路径

@@ -12,3 +12,13 @@ func TestYamlLoad(t *testing.T) {
 
 	assert.Equal(t, application.Name, "dubbo-go")
 }
+
+func TestPropertiesLoad(t *testing.T) {
+	conf := Load(WithPath("../conf/properties"),
+		WithName("application.properties"),
+		WithGenre("properties"))
+
+	application, _ := conf.GetApplicationConfig()
+
+	assert.Equal(t, application.Name, "dubbo-go")
+}
