@@ -13,7 +13,7 @@ import (
 )
 
 func TestName(t *testing.T) {
-	k := koanf.New("=")
+	k := koanf.New(".")
 
 	if err := k.Load(file.Provider(absolutePath("../conf/application.properties")), Parser()); err != nil {
 		panic(err)
