@@ -22,7 +22,6 @@ func TestName(t *testing.T) {
 	if err := k.UnmarshalWithConf("dubbo", &conf, koanf.UnmarshalConf{Tag: "yaml"}); err != nil {
 		fmt.Println(err)
 	}
-
 	fmt.Println(conf.Application.Name)
 }
 
