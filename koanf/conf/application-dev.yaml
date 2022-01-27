@@ -1,12 +1,4 @@
 dubbo:
-  profiles:
-    active: dev
-  application:
-    name: dubbo-go
-    module: local
-    version: 1.0.0
-    owner: zhaoyunxing
-    environment: dev
   registries:
     nacos:
       protocol: nacos
@@ -17,7 +9,7 @@ dubbo:
       protocol: zk
       timeout: 5s
       group: dev
-      address: 127.0.0.1:2181
+      address: 193.168.56.100:2181
   services:
     helloService:
       interface: org.dubbo.service.HelloService

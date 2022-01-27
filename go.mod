@@ -1,6 +1,6 @@
 module github.com/zhaoyunxing
 
-go 1.14
+go 1.15
 
 require (
 	github.com/creasty/defaults v1.5.1
