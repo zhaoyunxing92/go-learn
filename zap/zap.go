@@ -1,38 +1,64 @@
 package main
 
 import (
-	"fmt"
-	"github.com/google/uuid"
+	"os"
+
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"os"
+
+	"github.com/natefinch/lumberjack"
 )
 
 func main() {
 
-	// 配置 sugaredLogger
-	var sugaredLogger *zap.SugaredLogger
-	writer := zapcore.AddSync(os.Stdout)
+	encoder := zapcore.NewConsoleEncoder(
+		zapcore.EncoderConfig{
+			MessageKey:    "msg",
+			LevelKey:      "level",
+			TimeKey:       "time",
+			CallerKey:     "line",
+			NameKey:       "logger",
+			FunctionKey:   "func",
+			StacktraceKey: "stacktrace",
+			//EncodeLevel:    zapcore.CapitalColorLevelEncoder,
+			EncodeLevel:    zapcore.CapitalLevelEncoder,
+			EncodeTime:     zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.0000"),
+			EncodeCaller:   zapcore.ShortCallerEncoder,
+			EncodeDuration: zapcore.SecondsDurationEncoder,
+		})
+	//colorable.NewColorableStdout()
+	// 设置日志级别
+	level := zap.NewAtomicLevelAt(zap.DebugLevel)
 
-	// 格式相关的配置
-	encoderConfig := zap.NewProductionEncoderConfig()
-	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder  // 修改时间戳的格式
-	encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder // 日志级别使用大写显示
-	encoder := zapcore.NewConsoleEncoder(encoderConfig)
+	file := zapcore.AddSync(&lumberjack.Logger{
+		Filename:   ".logs/zap.log", //日志文件存放目录
+		MaxSize:    1,               //文件大小限制,单位MB
+		MaxBackups: 5,               //最大保留日志文件数量
+		MaxAge:     30,              //日志文件保留天数
+		Compress:   true,            //是否压缩处理
+	})
 
-	core := zapcore.NewCore(encoder, writer, zapcore.DebugLevel)  // 将日志级别设置为 DEBUG
-	logger := zap.New(core, zap.AddCaller(), zap.Fields(zapcore.Field{  // 添加 uuid 字段
-		Key:       "uuid",
-		Type:      zapcore.StringType,
-		String:    uuid.New().String(),
-	}))
-	sugaredLogger = logger.Sugar()
+	//jsonEncoder := zapcore.NewJSONEncoder(zapcore.EncoderConfig{
+	//	MessageKey:     "msg",
+	//	LevelKey:       "level",
+	//	TimeKey:        "time",
+	//	CallerKey:      "line",
+	//	NameKey:        "logger",
+	//	FunctionKey:    "func",
+	//	StacktraceKey:  "stacktrace",
+	//	EncodeLevel:    zapcore.CapitalColorLevelEncoder,
+	//	EncodeTime:     zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05"),
+	//	EncodeCaller:   zapcore.ShortCallerEncoder,
+	//	EncodeDuration: zapcore.SecondsDurationEncoder,
+	//})
 
-	// 打印日志
-	sugaredLogger.Debugf("i am debug, using %s", "sugar")   // 这行现在可以打印出来了！
-	sugaredLogger.Infof("i am info, using %s", "sugar")      // INFO  级别日志，这个会正常打印
-	sugaredLogger.Warnf("i am warn, using %s", "sugar")    // WARN  级别日志，这个会正常打印
-	sugaredLogger.Errorf("i am error, using %s", "sugar")   // ERROR 级别日志，这个会打印，并附带堆栈信息
-	sugaredLogger.Fatalf("i am fatal, using %s", "sugar")    // FATAL 级别日志，这个会打印，附带堆栈信息，并调用 os.Exit 退出
-	fmt.Println("can i be printed?")  // 这行不会打印，呃...上面已经退出了
+	fileCore := zapcore.NewCore(encoder, zapcore.NewMultiWriteSyncer(file, zapcore.AddSync(os.Stdout)), level)
+	log := zap.New(fileCore, zap.AddCaller()).Sugar()
+
+	for {
+		log.Info("log level is info")
+		log.Error("log level is error")
+		log.Warn("log level is warn")
+		log.Debug("log level debug")
+	}
 }

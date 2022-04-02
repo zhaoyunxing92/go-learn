@@ -11,7 +11,9 @@ require (
 	github.com/google/wire v0.5.0
 	github.com/knadh/koanf v1.1.1
 	github.com/magiconair/properties v1.8.5
+	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mitchellh/mapstructure v1.4.1
+	github.com/natefinch/lumberjack v2.0.0+incompatible // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/pflag v1.0.5
