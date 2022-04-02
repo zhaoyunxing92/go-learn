@@ -5,7 +5,7 @@ import (
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
-	"github.com/zhaoyunxing/viper/config/root"
+	"github.com/zhaoyunxing/koanf/domain"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -18,9 +18,22 @@ func main() {
 	if err := k.Load(file.Provider(absolutePath("./koanf/conf/application.yaml")), yaml.Parser()); err != nil {
 		panic(err)
 	}
+	dev := koanf.New(".")
+	if err := dev.Load(file.Provider(absolutePath("./koanf/conf/application-dev.yaml")), yaml.Parser()); err != nil {
+		panic(err)
+	}
 
-	var conf root.Config
-	if err :=  k.UnmarshalWithConf("", &conf, koanf.UnmarshalConf{Tag: "yaml"}); err != nil {
+	err := k.Merge(dev)
+	if err != nil {
+		panic(err)
+	}
+
+	k.Print()
+	fmt.Println("===============")
+	dev.Print()
+
+	var conf domain.DubboConfig
+	if err := k.UnmarshalWithConf("dubbo", &conf, koanf.UnmarshalConf{Tag: "yaml"}); err != nil {
 		fmt.Println(err)
 	}
 	duration := k.Duration("dubbo.registries.nacos.timeout")
