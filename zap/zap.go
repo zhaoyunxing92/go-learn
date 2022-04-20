@@ -55,10 +55,8 @@ func main() {
 	fileCore := zapcore.NewCore(encoder, zapcore.NewMultiWriteSyncer(file, zapcore.AddSync(os.Stdout)), level)
 	log := zap.New(fileCore, zap.AddCaller()).Sugar()
 
-	for {
-		log.Info("log level is info")
-		log.Error("log level is error")
-		log.Warn("log level is warn")
-		log.Debug("log level debug")
-	}
+	log.Info("log level is info")
+	log.Error("log level is error")
+	log.Warn("log level is warn")
+	log.Debug("log level debug")
 }
