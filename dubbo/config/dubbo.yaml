@@ -1,0 +1,42 @@
+dubbo:
+  providers:
+    - hello:
+        name: hello
+        register: false
+    - order:
+        name: order
+        register: false
+  application:
+    name: dubbo-go
+    module: local
+    version: 1.0.0
+    owner: zhaoyunxing
+    metadata:
+      type: local
+      tags:
+        - name: java
+  protocols:
+    dubbo:
+      name: dubbo
+      ip: 127.0.0.1
+      port: 20000
+    tri:
+      name: tri
+      ip: 127.0.0.1
+      port: 1800
+  router:
+    - scope: scope
+      key: key
+      force: true
+      tags:
+        - name: dubbo
+          addresses: 127.0.0.1
+  methods:
+    hello:
+      - name: echo
+        retries: re
+      - name: say
+        retries: re
+    order:
+      - name: order
+        retries: re
