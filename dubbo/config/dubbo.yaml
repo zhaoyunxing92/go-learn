@@ -1,10 +1,19 @@
 dubbo:
+  names:
+    dubbo:
+      dubbo:
+        address: 127.0.0.1
+      tri:
+        address: 127.0.0.1
   providers:
     - hello:
         name: hello
         register: false
-    - order:
+      order:
         name: order
+        register: false
+    - user:
+        name: hello
         register: false
   application:
     name: dubbo-go
@@ -31,6 +40,12 @@ dubbo:
       tags:
         - name: dubbo
           addresses: 127.0.0.1
+    - scope: scope
+      key: key
+      force: true
+      tags:
+        - name: dubbo
+          addresses: 127.0.0.5
   methods:
     hello:
       - name: echo

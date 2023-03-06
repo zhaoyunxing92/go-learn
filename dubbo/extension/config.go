@@ -1,12 +1,13 @@
 package extension
 
 import (
-	"github.com/spf13/viper"
 	"math"
 	"reflect"
 	"sort"
 	"strconv"
 	strings "strings"
+
+	"github.com/spf13/viper"
 )
 
 type Config interface {
@@ -56,6 +57,7 @@ func Load(path, name string, config Config) (err error) {
 	viper.AddConfigPath(path)
 	viper.SetConfigName(name)
 	viper.SetConfigType("yaml")
+	viper.AllSettings()
 
 	if err = viper.ReadInConfig(); err != nil {
 		return err
@@ -68,6 +70,16 @@ func Load(path, name string, config Config) (err error) {
 }
 
 func analysis(config Config, key string) {
+
+	tp := reflect.TypeOf(config)
+	sv := reflect.ValueOf(config)
+	if tp.Kind() == reflect.Ptr {
+		tp = tp.Elem()
+		sv = sv.Elem()
+	}
+	if !sv.IsValid() {
+		return
+	}
 	prefix := analyzePrefix(config.Prefix(), key)
 	def := Definition{prefix: prefix, config: config}
 	if _, ok := config.(Init); ok {
@@ -77,15 +89,6 @@ func analysis(config Config, key string) {
 			def.order = math.MaxInt
 		}
 		AddDefinitions(def)
-	}
-	tp := reflect.TypeOf(config)
-	sv := reflect.ValueOf(config)
-	if tp.Kind() == reflect.Ptr {
-		tp = tp.Elem()
-		sv = sv.Elem()
-	}
-	if !sv.IsValid() {
-		return
 	}
 	for i := 0; i < tp.NumField(); i++ {
 		field := tp.Field(i)
@@ -105,11 +108,16 @@ func analysis(config Config, key string) {
 }
 
 func analyzePrefix(pre string, key string) string {
-	if len(key) > 0 {
+	if len(pre) > 0 && len(key) > 0 {
 		return strings.Join([]string{pre, key}, ".")
-	} else {
+	}
+	if len(pre) > 0 {
 		return pre
 	}
+	if len(key) > 0 {
+		return key
+	}
+	return ""
 }
 
 // analyzeCollector analyze collector
@@ -121,7 +129,7 @@ func analyzeMap(value reflect.Value, key string) {
 		switch kind {
 		case reflect.Ptr:
 			if c, ok := m.Interface().(Config); ok {
-				analysis(c, suffix)
+				analysis(c, analyzePrefix(key, k.String()))
 			}
 		case reflect.Map:
 			analyzeMap(m, suffix)
@@ -142,7 +150,7 @@ func analyzeSlice(value reflect.Value, key string) {
 				analysis(c, suffix)
 			}
 		case reflect.Map:
-			analyzeMap(s, suffix)
+			analyzeMap(s, strconv.Itoa(i))
 		case reflect.Slice:
 			analyzeSlice(s, suffix)
 		}
