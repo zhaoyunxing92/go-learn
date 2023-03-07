@@ -3,15 +3,8 @@ package config
 import "fmt"
 
 type Router struct {
-	Scope      string   `validate:"required" yaml:"scope"`
-	Key        string   `validate:"required" yaml:"key"`
-	Force      bool     `default:"false" yaml:"force"`
-	Runtime    bool     `default:"false" yaml:"runtime"`
-	Enabled    bool     `default:"true" yaml:"enabled"`
-	Valid      bool     `default:"true" yaml:"valid"`
-	Priority   int      `default:"0" yaml:"priority"`
-	Conditions []string `yaml:"conditions"`
-	Tags       []Tag    `yaml:"tags"`
+	Scope string `validate:"required" yaml:"scope"`
+	Tags  []Tag  `yaml:"tags"`
 }
 
 func (r *Router) Prefix() string {
@@ -27,8 +20,8 @@ func (r *Router) Order() int {
 }
 
 type Tag struct {
-	Name      string   `yaml:"name" json:"name,omitempty" property:"name"`
-	Addresses []string `yaml:"addresses" json:"addresses,omitempty" property:"addresses"`
+	Name      string `yaml:"name" json:"name,omitempty" property:"name"`
+	Addresses string `yaml:"addresses" json:"addresses,omitempty" property:"addresses"`
 }
 
 func (t *Tag) Prefix() string {

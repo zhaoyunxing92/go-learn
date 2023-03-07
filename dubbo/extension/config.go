@@ -40,6 +40,10 @@ func GetDefinitions() []Definition {
 	return events
 }
 
+func GetKeys() map[string]struct{} {
+	return keys
+}
+
 func Register(config Config) {
 	analysis(config, "")
 }
@@ -95,14 +99,14 @@ func analysis(config Config, key string) {
 		kind := field.Type.Kind()
 		val := sv.Field(i)
 		switch kind {
-		case reflect.Ptr:
+		case reflect.Ptr, reflect.Struct:
 			if c, ok := val.Interface().(Config); ok {
-				analysis(c, "")
+				analysis(c, key)
 			}
 		case reflect.Map:
-			analyzeMap(val, "")
+			analyzeMap(val, key)
 		case reflect.Slice:
-			analyzeSlice(val, "")
+			analyzeSlice(val, key)
 		}
 	}
 }
@@ -127,7 +131,7 @@ func analyzeMap(value reflect.Value, key string) {
 		kind := m.Kind()
 		suffix := analyzePrefix(k.String(), key)
 		switch kind {
-		case reflect.Ptr:
+		case reflect.Ptr, reflect.Struct:
 			if c, ok := m.Interface().(Config); ok {
 				analysis(c, analyzePrefix(key, k.String()))
 			}
@@ -145,7 +149,7 @@ func analyzeSlice(value reflect.Value, key string) {
 		kind := s.Kind()
 		suffix := analyzePrefix(key, strconv.Itoa(i))
 		switch kind {
-		case reflect.Ptr:
+		case reflect.Ptr, reflect.Struct:
 			if c, ok := s.Interface().(Config); ok {
 				analysis(c, suffix)
 			}
