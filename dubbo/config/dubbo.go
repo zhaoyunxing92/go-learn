@@ -5,7 +5,7 @@ import (
 )
 
 type Config struct {
-	//Application *Application                `validate:"required" yaml:"application"`
+	//Application *Application `validate:"required" yaml:"application"`
 	//Methods     map[string][]*Method        `validate:"required" yaml:"methods"`
 	//Protocols   map[string]*Protocol        `validate:"required" yaml:"protocols"`
 	Router []*Router `yaml:"router"`

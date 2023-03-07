@@ -25,7 +25,7 @@ type Order interface {
 type Definition struct {
 	prefix string
 	order  int
-	config Config
+	config Init
 }
 
 var (
@@ -45,7 +45,7 @@ func GetKeys() map[string]struct{} {
 }
 
 func Register(config Config) {
-	analysis(config, "")
+	analysis(config)
 }
 
 func AddDefinitions(def Definition) {
@@ -69,14 +69,19 @@ func Load(path, name string, config Config) (err error) {
 	if err = viper.UnmarshalKey(config.Prefix(), config); err != nil {
 		return err
 	}
-	analysis(config, "")
+	analysis(config)
 	return nil
 }
 
-func analysis(config Config, key string) {
+func analysis(config Config) {
+	if event, ok := config.(Init); ok {
+		analyzeStruct(event, config.Prefix())
+	}
+}
 
-	tp := reflect.TypeOf(config)
-	sv := reflect.ValueOf(config)
+func analyzeStruct(event Init, key string) {
+	tp := reflect.TypeOf(event)
+	sv := reflect.ValueOf(event)
 	if tp.Kind() == reflect.Ptr {
 		tp = tp.Elem()
 		sv = sv.Elem()
@@ -84,29 +89,28 @@ func analysis(config Config, key string) {
 	if !sv.IsValid() {
 		return
 	}
-	prefix := analyzePrefix(config.Prefix(), key)
-	def := Definition{prefix: prefix, config: config}
-	if _, ok := config.(Init); ok {
-		if order, ok := config.(Order); ok {
-			def.order = order.Order()
-		} else {
-			def.order = math.MaxInt
-		}
-		AddDefinitions(def)
+	def := Definition{prefix: key, config: event}
+	if order, ok := event.(Order); ok {
+		def.order = order.Order()
+	} else {
+		def.order = math.MaxInt
 	}
+	AddDefinitions(def)
 	for i := 0; i < tp.NumField(); i++ {
 		field := tp.Field(i)
 		kind := field.Type.Kind()
 		val := sv.Field(i)
 		switch kind {
 		case reflect.Ptr, reflect.Struct:
-			if c, ok := val.Interface().(Config); ok {
-				analysis(c, key)
+			if e, ok := val.Interface().(Init); ok {
+				analyzeStruct(e, prefix(key, field.Tag.Get("yaml")))
 			}
 		case reflect.Map:
 			analyzeMap(val, key)
 		case reflect.Slice:
-			analyzeSlice(val, key)
+			for s := 0; s < val.Len(); s++ {
+				analyzeSlice(val.Index(s), prefix(key, field.Tag.Get("yaml"), strconv.Itoa(s)))
+			}
 		}
 	}
 }
@@ -124,6 +128,13 @@ func analyzePrefix(pre string, key string) string {
 	return ""
 }
 
+func prefix(pre ...string) string {
+	if len(pre) > 0 {
+		return strings.Join(pre, ".")
+	}
+	return ""
+}
+
 // analyzeCollector analyze collector
 func analyzeMap(value reflect.Value, key string) {
 	for _, k := range value.MapKeys() {
@@ -132,8 +143,8 @@ func analyzeMap(value reflect.Value, key string) {
 		suffix := analyzePrefix(k.String(), key)
 		switch kind {
 		case reflect.Ptr, reflect.Struct:
-			if c, ok := m.Interface().(Config); ok {
-				analysis(c, analyzePrefix(key, k.String()))
+			if c, ok := m.Interface().(Init); ok {
+				analyzeStruct(c, analyzePrefix(key, k.String()))
 			}
 		case reflect.Map:
 			analyzeMap(m, suffix)
@@ -144,19 +155,16 @@ func analyzeMap(value reflect.Value, key string) {
 }
 
 func analyzeSlice(value reflect.Value, key string) {
-	for i := 0; i < value.Len(); i++ {
-		s := value.Index(i)
-		kind := s.Kind()
-		suffix := analyzePrefix(key, strconv.Itoa(i))
-		switch kind {
-		case reflect.Ptr, reflect.Struct:
-			if c, ok := s.Interface().(Config); ok {
-				analysis(c, suffix)
-			}
-		case reflect.Map:
-			analyzeMap(s, strconv.Itoa(i))
-		case reflect.Slice:
-			analyzeSlice(s, suffix)
+	switch value.Kind() {
+	case reflect.Ptr, reflect.Struct:
+		if c, ok := value.Interface().(Init); ok {
+			analyzeStruct(c, key)
+		}
+	case reflect.Map:
+		//analyzeMap(s, strconv.Itoa(i))
+	case reflect.Slice:
+		for s := 0; s < value.Len(); s++ {
+			analyzeSlice(value.Index(s), prefix(key, strconv.Itoa(s)))
 		}
 	}
 }

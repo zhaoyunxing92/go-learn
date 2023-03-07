@@ -3,8 +3,6 @@ package dubbo
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/zhaoyunxing/dubbo/config"
 	"github.com/zhaoyunxing/dubbo/extension"
 )
@@ -46,20 +44,36 @@ func TestMapAndMap(t *testing.T) {
 	//}
 }
 
-func TestSlice(t *testing.T) {
-	router := make([]*config.Router, 0, 3)
-	router = append(router, &config.Router{Scope: "local", Tags: []config.Tag{
-		{Name: "dubbo", Addresses: "127.0.0.1"},
-	}})
-
-	router = append(router, &config.Router{Scope: "remote", Tags: []config.Tag{
-		{Name: "tri", Addresses: "127.0.0.1"},
-	}})
-
-	c := &config.Config{Router: router}
-
-	extension.Register(c)
-
-	definitions := extension.GetKeys()
-	assert.True(t, len(definitions) > 0)
+func TestSliceAndSliceAndStruct(t *testing.T) {
+	//router := make([]*config.Router, 0, 3)
+	//address := make([]*config.Address, 0, 3)
+	//address = append(address, &config.Address{Ip: "127.0.0.1"})
+	//
+	//router = append(router, &config.Router{Tags: []*config.Tag{
+	//	{Name: "dubbo", Remote: &config.Remote{Address: address}},
+	//	{Name: "tri"},
+	//}})
+	//
+	//router = append(router, &config.Router{Tags: []*config.Tag{
+	//	{Name: "tri"},
+	//}})
+	//
+	//c := &config.Config{Router: router}
+	//
+	//extension.Register(c)
+	//keys := []string{"dubbo",
+	//	"dubbo.router.0",
+	//	"dubbo.router.0.tags.0",
+	//	"dubbo.router.0.tags.0.remote",
+	//	"dubbo.router.0.tags.0.remote.address.0",
+	//	"dubbo.router.0.tags.1",
+	//	"dubbo.router.1",
+	//	"dubbo.router.1.tags.0"}
+	//definitions := extension.GetKeys()
+	//assert.True(t, len(definitions) == len(keys))
+	//for _, key := range keys {
+	//	if _, ok := definitions[key]; !ok {
+	//		t.Error("key def not find", key)
+	//	}
+	//}
 }

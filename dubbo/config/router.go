@@ -3,12 +3,7 @@ package config
 import "fmt"
 
 type Router struct {
-	Scope string `validate:"required" yaml:"scope"`
-	Tags  []Tag  `yaml:"tags"`
-}
-
-func (r *Router) Prefix() string {
-	return "dubbo.router"
+	Tags []*Tag `yaml:"tags"`
 }
 
 func (r *Router) Init(key string) {
@@ -20,12 +15,24 @@ func (r *Router) Order() int {
 }
 
 type Tag struct {
-	Name      string `yaml:"name" json:"name,omitempty" property:"name"`
-	Addresses string `yaml:"addresses" json:"addresses,omitempty" property:"addresses"`
+	Name   string  `yaml:"name"`
+	Remote *Remote `yaml:"remote"`
 }
 
-func (t *Tag) Prefix() string {
-	return "dubbo.router.tags"
+type Remote struct {
+	Address []*Address `yaml:"address"`
+}
+type Address struct {
+	Ip string
+}
+
+func (a Address) Init(key string) {
+
+	fmt.Println("dubbo remote tag remote address init ", key)
+}
+
+func (r *Remote) Init(key string) {
+	fmt.Println("dubbo remote init", key)
 }
 
 func (t *Tag) Init(key string) {
