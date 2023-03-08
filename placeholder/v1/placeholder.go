@@ -21,9 +21,6 @@ func (p *Placeholder) Delims(open, close string) *Placeholder {
 }
 
 func (p *Placeholder) Resolver(text string) string {
-	if len(text) == 0 {
-		return ""
-	}
 	return p.resolver(text)
 }
 
