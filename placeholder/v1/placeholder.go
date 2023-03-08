@@ -31,19 +31,19 @@ func (p *Placeholder) resolver(text string) string {
 	var (
 		b     bytes.Buffer
 		start int
+		end   int
 	)
-	if len(text) == 0 {
-		return b.String()
-	}
 	start = strings.Index(text, p.open)
-	for start > -1 {
+	for start > -1 && start >= end {
 		start = start + len(p.open)
-		if end := strings.Index(text, p.close); end != -1 {
+		if end = strings.Index(text, p.close); end != -1 {
 			placeholder := text[start:end]
 			split := strings.Split(placeholder, ":")
 			b.WriteString(split[1])
 			text = text[end+1:]
-			p.resolver(text)
+			//if strings.Index(text, p.open) > -1 {
+			b.WriteString(p.resolver(text))
+			//}
 		} else {
 			start = -1
 		}
