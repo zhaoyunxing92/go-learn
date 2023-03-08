@@ -5,12 +5,12 @@ import (
 )
 
 type Config struct {
+	Protocols   map[string]*Protocol        `validate:"required" yaml:"protocols"`
+	Names       map[string]map[string]*Name `validate:"required" yaml:"names"`
 	Application *Application                `validate:"required" yaml:"application"`
 	Methods     map[string][]*Method        `validate:"required" yaml:"methods"`
-	Protocols   map[string]*Protocol        `validate:"required" yaml:"protocols"`
 	Router      []*Router                   `yaml:"router"`
 	Providers   []map[string]*Provider      `yaml:"providers"`
-	Names       map[string]map[string]*Name `validate:"required" yaml:"names"`
 }
 
 func (c *Config) Prefix() string {
